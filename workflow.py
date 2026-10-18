@@ -8,8 +8,12 @@ from langchain_core.prompts import ChatPromptTemplate
 from langgraph.graph import END, START, StateGraph
 from pydantic import BaseModel, Field
 
-from .corpus import DEPENDENCIES, evidence_ids
-from .retrieval import lexical_search
+if __package__:
+    from .corpus import DEPENDENCIES, evidence_ids
+    from .retrieval import lexical_search
+else:
+    from corpus import DEPENDENCIES, evidence_ids
+    from retrieval import lexical_search
 
 
 class Context(BaseModel):

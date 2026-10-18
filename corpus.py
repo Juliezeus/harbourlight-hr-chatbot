@@ -4,7 +4,10 @@ from pathlib import Path
 
 from langchain_core.documents import Document
 
-SOURCE = Path(__file__).resolve().parents[1] / "sources/harbourlight_people_and_reward_policy.md"
+_MODULE_DIR = Path(__file__).resolve().parent
+SOURCE = _MODULE_DIR.parent / "sources/harbourlight_people_and_reward_policy.md"
+if not SOURCE.is_file():
+    SOURCE = _MODULE_DIR / "harbourlight_people_and_reward_policy.md"
 DEPENDENCIES = {
     "annual": ["LEA01", "BU02"],
     "personal": ["LEA02"],

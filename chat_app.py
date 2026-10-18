@@ -7,9 +7,17 @@ import streamlit as st
 from dotenv import load_dotenv
 import truststore
 
-from hr_rag.corpus import load_corpus
-from hr_rag.retrieval import PineconeHybrid
-from hr_rag.workflow import build_workflow, chat_model
+try:
+    from hr_rag.corpus import load_corpus
+    from hr_rag.retrieval import PineconeHybrid
+    from hr_rag.workflow import build_workflow, chat_model
+except ModuleNotFoundError as exc:
+    if exc.name != "hr_rag":
+        raise
+    # GitHub's file picker can upload package files at repository root.
+    from corpus import load_corpus
+    from retrieval import PineconeHybrid
+    from workflow import build_workflow, chat_model
 
 st.set_page_config(page_title="Harbourlight HR assistant", page_icon=":material/policy:")
 st.title("Harbourlight HR assistant")
